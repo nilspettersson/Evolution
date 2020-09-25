@@ -19,7 +19,7 @@ public class Animal {
 		timeAlive = 0;
 	}
 	
-	public void update(Layer animalLayer, ArrayList<Animal> animals, Layer foodLayer) {
+	public void update(Layer animalLayer, ArrayList<Animal> animals, Layer foodLayer,  ArrayList<Food> food) {
 		angle+=0.01;
 		timeAlive++;
 		
@@ -30,15 +30,36 @@ public class Animal {
 			timeAlive = 0;
 		}
 		
-		foodLayer.setColor(findClosestFood(animalLayer, animals, foodLayer), new Vector4f(0, 1, 0, 1));
+		
+		int closestFood = findClosestFood(animalLayer, animals, foodLayer, food);
+		foodLayer.setColor(closestFood, new Vector4f(0, 1, 0, 1));
+		
+		float Xdif = animalLayer.getX(index) - foodLayer.getX(closestFood);
+		float Ydif = animalLayer.getY(index) - foodLayer.getY(closestFood);
+		
+		if((Math.abs(Xdif) + Math.abs(Ydif)) < 20) {
+			foodLayer.setColor(closestFood, new Vector4f(1, 1, 1, 0));
+			food.get(closestFood).setDone(false);
+		}
+		
+		//float dis = (float) Math.sqrt(Xdif * Xdif + Ydif * Ydif);
+		
+		//foodLayer.getC
+		angle = Math.atan2(-Ydif, -Xdif);
+		
+		
 		
 	}
 	
-	public int findClosestFood(Layer animalLayer, ArrayList<Animal> animals, Layer foodLayer) {
+	public int findClosestFood(Layer animalLayer, ArrayList<Animal> animals, Layer foodLayer, ArrayList<Food> food) {
 		
 		float minDist = 1000000;
 		int closest = 0;
 		for(int i = 0; i < foodLayer.size(); i++) {
+			if(food.get(i).isDone() == false) {
+				continue;
+			}
+			
 			float Xdif = animalLayer.getX(index) - foodLayer.getX(i);
 			float Ydif = animalLayer.getY(index) - foodLayer.getY(i);
 			
