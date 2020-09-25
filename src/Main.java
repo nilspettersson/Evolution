@@ -23,7 +23,7 @@ public class Main extends Game {
 		
 		animals = new ArrayList<Animal>();
 		animalLayer = getLayer(0);
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 1000; i++) {
 			animalLayer.addEntity((float) (Math.random() * 800)-400, (float) (Math.random() * 800)-400, 10, 10, new Vector4f(1), 0);
 			animals.add(new Animal(i));
 		}
@@ -32,7 +32,7 @@ public class Main extends Game {
 		addLayer(100000, false);
 		food = new ArrayList<Food>();
 		foodLayer = getLayer(1);
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 6000; i++) {
 			foodLayer.addEntity((float) (Math.random() * 800)-400, (float) (Math.random() * 800)-400, 10, 10, new Vector4f(1, 0, 0, 1), 0);
 			food.add(new Food(i));
 		}
@@ -52,10 +52,12 @@ public class Main extends Game {
 			food.get(i).update(foodLayer, food);
 		}
 		
-		
-		render(0, true);
 		render(1, true);
+		render(0, true);
 		
+		
+		setFpsCap(120);
+		System.out.println(getFps());
 	}
 	
 	

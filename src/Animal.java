@@ -23,7 +23,7 @@ public class Animal {
 		angle+=0.01;
 		timeAlive++;
 		
-		if(timeAlive > 1000) {
+		if(timeAlive > 10000) {
 			animalLayer.addEntity(animalLayer.getX(index), animalLayer.getY(index), 10, 10, new Vector4f(1), 0);
 			animals.add(new Animal(animals.size()));
 			
@@ -42,7 +42,7 @@ public class Animal {
 			float Xdif = animalLayer.getX(index) - foodLayer.getX(i);
 			float Ydif = animalLayer.getY(index) - foodLayer.getY(i);
 			
-			float dis = (float) Math.sqrt(Xdif * Xdif + Ydif * Ydif);
+			float dis = (Math.abs(Xdif) + Math.abs(Ydif));
 			
 			if(dis < minDist) {
 				minDist = dis;
