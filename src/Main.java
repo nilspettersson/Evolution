@@ -45,7 +45,7 @@ public class Main extends Game {
 		for(int i = 0; i < animalLayer.size(); i++) {
 			animalLayer.setX(i, animalLayer.getX(i) + animals.get(i).getXVel());
 			animalLayer.setY(i, animalLayer.getY(i) + animals.get(i).getYVel());
-			animals.get(i).update(animalLayer, animals);
+			animals.get(i).update(animalLayer, animals, foodLayer);
 		}
 		
 		for(int i = 0; i < foodLayer.size(); i++) {
@@ -53,7 +53,7 @@ public class Main extends Game {
 		}
 		
 		
-		//render(0, true);
+		render(0, true);
 		render(1, true);
 		
 	}
