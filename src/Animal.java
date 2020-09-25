@@ -23,7 +23,7 @@ public class Animal {
 		angle+=0.01;
 		timeAlive++;
 		
-		if(timeAlive > 10) {
+		if(timeAlive > 100) {
 			animalLayer.addEntity(animalLayer.getX(index), animalLayer.getY(index), 10, 10, new Vector4f(1), 0);
 			animals.add(new Animal(animals.size()));
 			

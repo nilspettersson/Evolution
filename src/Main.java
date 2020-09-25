@@ -12,18 +12,29 @@ public class Main extends Game {
 	}
 	
 	ArrayList<Animal> animals;
-	
 	Layer animalLayer;
-
+	
+	ArrayList<Food> food;
+	Layer foodLayer;
+	
 	@Override
 	public void setup() {
-		addLayer(400000, false);
+		addLayer(100000, false);
 		
 		animals = new ArrayList<Animal>();
 		animalLayer = getLayer(0);
 		for(int i = 0; i < 10; i++) {
 			animalLayer.addEntity((float) (Math.random() * 800)-400, (float) (Math.random() * 800)-400, 10, 10, new Vector4f(1), 0);
 			animals.add(new Animal(i));
+		}
+		
+		
+		addLayer(100000, false);
+		food = new ArrayList<Food>();
+		foodLayer = getLayer(1);
+		for(int i = 0; i < 10; i++) {
+			foodLayer.addEntity((float) (Math.random() * 800)-400, (float) (Math.random() * 800)-400, 10, 10, new Vector4f(1, 0, 0, 1), 0);
+			food.add(new Food(i));
 		}
 		
 	}
@@ -37,8 +48,13 @@ public class Main extends Game {
 			animals.get(i).update(animalLayer, animals);
 		}
 		
+		for(int i = 0; i < foodLayer.size(); i++) {
+			food.get(i).update(foodLayer, food);
+		}
 		
-		render(0, true);
+		
+		//render(0, true);
+		render(1, true);
 		
 	}
 	
